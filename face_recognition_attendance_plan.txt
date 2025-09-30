@@ -1,0 +1,80 @@
+Project Plan: Face Recognition Attendance System (3-Tier)
+
+1. Project Overview
+- Goal: Build a 3-tier Python application for automated attendance using facial recognition.
+- Tiers:
+  - UI/UX Layer (Presentation): Web portal for admin registration, dashboard for attendance logs.
+  - Application Layer (Business Logic): attendance.py (face detection & recognition), Admin portal logic.
+  - Database Layer: Stores user info, attendance logs, face embeddings.
+
+2. High-Level Architecture
+[ UI/UX Layer ]
+   - Web Admin Portal (Flask/FastAPI + HTML/CSS/JS)
+   - Attendance dashboard (view logs)
+
+         |
+         v
+[ Application Layer ]
+   - attendance.py (OpenCV, face_recognition library)
+   - Admin module (APIs for register/update/delete)
+   - Business rules (attendance marking, duplicate prevention)
+
+         |
+         v
+[ Database Layer ]
+   - Users table (ID, Name, Face Encoding, Role)
+   - Attendance table (UserID, Date, Time, Status)
+
+3. Phased Project Plan
+
+Phase 1: Requirements & Design
+- Define functional requirements: Register users, Capture attendance, Store & retrieve logs.
+- Deliverables: Requirements doc, ERD, Wireframes.
+
+Phase 2: Database Layer
+- Tables: Users, Attendance.
+- Tools: SQLite (simple) → PostgreSQL/MySQL (scalable).
+- Deliverables: Schema + migrations, Seed data.
+
+Phase 3: Application Layer
+1. Attendance Module (attendance.py):
+   - Capture video frames with OpenCV.
+   - Extract face encodings (face_recognition).
+   - Compare with stored encodings in DB.
+   - Mark attendance if match found.
+
+2. Admin Portal (Backend):
+   - Register new person (name + face image).
+   - Store face encoding in DB.
+   - Manage users (update/delete).
+
+Deliverables: Attendance marking script, API endpoints, Unit tests.
+
+Phase 4: UI/UX Layer
+- Admin Web Portal: Register Page, Users List, Attendance Logs.
+- Tech: Flask/FastAPI with Jinja templates, or Flask + React.
+- Deliverables: Functional portal, Styling.
+
+Phase 5: Integration & Testing
+- Connect UI → Application → DB.
+- Test workflow: Register → Face stored → Attendance marked → Logs visible.
+- Deliverables: Integrated system, Test cases + reports.
+
+Phase 6: Deployment
+- Docker containers for Admin portal, Attendance service, Database.
+- CI/CD pipeline with GitHub Actions.
+- Deliverables: Dockerized deployment, Setup docs.
+
+4. Timeline (8 Weeks)
+- Requirements & Design: 1 week
+- Database Layer: 1 week
+- Application Layer: 2 weeks
+- UI/UX Layer: 2 weeks
+- Integration & Testing: 1 week
+- Deployment: 1 week
+
+5. Tech Stack
+- UI/UX: Flask (Jinja2) or React + FastAPI, Bootstrap/Tailwind.
+- Application: Python (OpenCV, face_recognition, SQLAlchemy).
+- Database: SQLite (dev) → PostgreSQL/MySQL (prod).
+- DevOps: Docker, GitHub Actions, AWS/GCP.
